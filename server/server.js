@@ -237,7 +237,7 @@ app.post('/api/wiinpay/pix/create', async (req, res) => {
         });
 
         const startedAt = Date.now();
-        const wiinpayResponse = await httpsPostJson('https://api.wiinpay.com.br/payment/create', wiinpayBody);
+        const wiinpayResponse = await httpsPostJson('https://api-v2.wiinpay.com.br/payment/create', wiinpayBody);
         const durationMs = Date.now() - startedAt;
 
         log('info', 'wiinpay_create_response', {
@@ -267,7 +267,18 @@ app.post('/api/wiinpay/pix/create', async (req, res) => {
 });
 
 app.post('/api/wiinpay/webhook', (req, res) => {
-    res.status(200).json({ ok: true });
+    const payload = req.body && typeof req.body === 'object' ? req.body : {};
+    const statusRaw = payload.status;
+    const statusNormalized = typeof statusRaw === 'string' ? statusRaw.toLowerCase() : statusRaw;
+
+    log('info', 'wiinpay_webhook_received', {
+        request_id: req.requestId,
+        status_raw: statusRaw,
+        status: statusNormalized,
+        id: payload.id,
+    });
+
+    res.status(200).json({ ok: true, status: statusNormalized });
 });
 
 // --- SERVIR FRONTEND ---
