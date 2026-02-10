@@ -142,6 +142,26 @@ function httpsPostJson(urlString, body) {
     });
 }
 
+function sanitizeUrlInput(value) {
+    const trimmed = String(value || '').trim();
+    if (!trimmed) return '';
+    return trimmed.replace(/^`+|`+$/g, '').replace(/^"+|"+$/g, '').replace(/^'+|'+$/g, '').trim();
+}
+
+function ensureWebhookPath(urlString) {
+    const cleaned = sanitizeUrlInput(urlString);
+    if (!cleaned) return '';
+    try {
+        const url = new URL(cleaned);
+        if (!url.pathname || url.pathname === '/' || url.pathname === '') {
+            url.pathname = '/api/wiinpay/webhook';
+        }
+        return url.toString();
+    } catch {
+        return cleaned;
+    }
+}
+
 app.get('/health', (req, res) => {
     res.status(200).json({ ok: true });
 });
@@ -170,15 +190,35 @@ app.post('/api/wiinpay/pix/create', async (req, res) => {
             return;
         }
 
-        const explicitWebhookUrl = String(process.env.WIINPAY_WEBHOOK_URL || '').trim();
-        const publicBaseUrl = String(
-            process.env.PUBLIC_BASE_URL || process.env.WIINPAY_PUBLIC_BASE_URL || process.env.RENDER_EXTERNAL_URL || '',
-        )
-            .trim()
-            .replace(/\/+$/, '');
-        const webhookUrl =
-            explicitWebhookUrl ||
-            (publicBaseUrl ? `${publicBaseUrl}/api/wiinpay/webhook` : `${req.protocol}://${req.get('host')}/api/wiinpay/webhook`);
+        const explicitWebhookUrl = ensureWebhookPath(process.env.WIINPAY_WEBHOOK_URL);
+        const publicBaseUrl = sanitizeUrlInput(
+            process.env.RENDER_EXTERNAL_URL || process.env.PUBLIC_BASE_URL || process.env.WIINPAY_PUBLIC_BASE_URL || '',
+        ).replace(/\/+$/, '');
+        const webhookUrl = explicitWebhookUrl || (publicBaseUrl ? `${publicBaseUrl}/api/wiinpay/webhook` : '');
+
+        if (!webhookUrl) {
+            res.status(500).json({
+                error: 'Webhook não configurado',
+                details: 'Configure WIINPAY_WEBHOOK_URL ou deixe o Render fornecer RENDER_EXTERNAL_URL',
+            });
+            return;
+        }
+
+        if (!/^https?:\/\//i.test(webhookUrl)) {
+            res.status(500).json({
+                error: 'Webhook inválido',
+                details: 'webhook_url precisa começar com http(s)://',
+            });
+            return;
+        }
+
+        if (/wiinpay\.com\.br/i.test(webhookUrl)) {
+            res.status(500).json({
+                error: 'Webhook inválido',
+                details: 'WIINPAY_WEBHOOK_URL deve apontar para o seu servidor, não para domínio da WiinPay',
+            });
+            return;
+        }
 
         const wiinpayBody = {
             api_key: apiKey,

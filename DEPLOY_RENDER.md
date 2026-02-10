@@ -20,7 +20,7 @@ Opcionais:
 - `WIINPAY_WEBHOOK_URL` (URL completa do webhook)
 - `PUBLIC_BASE_URL` (base pública do app, ex: `https://seu-app.onrender.com`)
 
-Se `WIINPAY_WEBHOOK_URL` não estiver setada, o servidor tenta montar o webhook usando `PUBLIC_BASE_URL` ou `RENDER_EXTERNAL_URL` (Render) e cai no `host` do request como último fallback.
+Se `WIINPAY_WEBHOOK_URL` não estiver setada, no Render o servidor usa `RENDER_EXTERNAL_URL` automaticamente (e monta `/api/wiinpay/webhook`). `PUBLIC_BASE_URL` é opcional.
 
 ## 4) Rotas úteis
 
