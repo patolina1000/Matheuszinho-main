@@ -136,6 +136,40 @@
             min-height: 220px;
         }
 
+        .pix-loading {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-height: 220px;
+        }
+
+        .pix-loading[aria-hidden="false"] {
+            display: flex;
+        }
+
+        .pix-loading-spinner {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 4px solid #f2f2f2;
+            border-top-color: #ff6a2e;
+            animation: pix-spin 0.9s linear infinite;
+        }
+
+        .pix-loading-text {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        @keyframes pix-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         .payment-pix-code input {
             width: 100%;
             border: 1px solid #ddd;
@@ -1530,6 +1564,10 @@ $(document).ready(function() {
       </div>
 
       <!-- QR Code -->
+      <div class="pix-loading" id="pix-loading" aria-hidden="true">
+        <div class="pix-loading-spinner"></div>
+        <p class="pix-loading-text">Gerando QR Code...</p>
+      </div>
       <div class="payment-qr-container" id="pix-qrcode-container">
          <!-- O QR Code será injetado aqui ou a imagem será exibida -->
          <img id="pix-qr-image" src="" alt="QR Code PIX" style="display: none;">
@@ -1611,6 +1649,11 @@ $(document).ready(function() {
         }
     }
 
+    function setPixLoading(isLoading) {
+        const loading = document.getElementById('pix-loading');
+        if (loading) loading.setAttribute('aria-hidden', isLoading ? 'false' : 'true');
+    }
+
     async function createWiinpayPix({ value, description, metadata }) {
         const payerName = window.localStorage.getItem('payer_name') || 'Cliente';
         const payerEmail = window.localStorage.getItem('payer_email') || 'cliente@exemplo.com';
@@ -1680,6 +1723,7 @@ $(document).ready(function() {
 
         const amount = document.getElementById('pix-amount');
         if (amount) amount.textContent = 'R$ 0,00';
+        setPixLoading(false);
     }
 
     function initPixPayments() {
@@ -1741,6 +1785,7 @@ $(document).ready(function() {
                 if (amount) amount.textContent = formatBRL(value);
 
                 setPixModalOpen(true);
+                setPixLoading(true);
 
                 try {
                     const result = await createWiinpayPix({
@@ -1755,9 +1800,11 @@ $(document).ready(function() {
                     const input = document.getElementById('pix-key-input');
                     if (input) input.value = result?.qr_code || '';
 
+                    setPixLoading(false);
                     renderPixQrCode(result || {});
                 } catch (err) {
                     const message = String(err?.message || 'Erro ao gerar Pix');
+                    setPixLoading(false);
                     showPixToast(message);
                     showPixErrorInModal(message);
                 }
