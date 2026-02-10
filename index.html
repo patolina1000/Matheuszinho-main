@@ -69,7 +69,9 @@
         .payment-modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(2, 6, 23, 0.72);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -85,29 +87,43 @@
             width: 100%;
             max-width: 440px;
             background: #fff;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 30px 80px rgba(2, 6, 23, 0.45);
+            max-height: calc(100vh - 32px);
+            display: flex;
+            flex-direction: column;
         }
 
         .payment-modal-close {
             position: absolute;
-            top: 10px;
+            top: 12px;
             right: 12px;
             border: 0;
-            background: transparent;
-            font-size: 28px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            font-size: 22px;
             line-height: 1;
             cursor: pointer;
-            color: #111;
+            color: #0f172a;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(2, 6, 23, 0.12);
         }
 
         .payment-modal-header {
-            padding: 16px;
-            background: linear-gradient(45deg, #ff4629, #ff8e38);
-            color: #fff;
+            padding: 16px 18px;
+            background: #fff;
+            color: #0f172a;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
         }
 
         .payment-profile {
@@ -117,22 +133,123 @@
         }
 
         .payment-profile-avatar img {
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 22px rgba(2, 6, 23, 0.16);
+        }
+
+        .payment-profile-info h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+        }
+
+        .payment-profile-info p {
+            margin: 2px 0 0;
+            font-size: 13px;
+            color: #64748b;
         }
 
         .payment-modal-body {
+            padding: 16px 18px 18px;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .payment-section-title {
+            margin: 0 0 10px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
+        .payment-benefits {
+            padding: 0;
+        }
+
+        .payment-benefits-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .payment-benefits-list li {
+            position: relative;
+            padding-left: 22px;
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.4;
+        }
+
+        .payment-benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #16a34a;
+            font-weight: 900;
+        }
+
+        .payment-plan {
+            margin-top: 14px;
+            padding: 14px 14px;
+            border-radius: 16px;
+            background: #f8fafc;
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .payment-plan-label {
+            margin: 0 0 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .payment-plan-duration {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
+        .payment-plan-price {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 900;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+
+        .payment-qr-card {
+            margin-top: 16px;
             padding: 16px;
+            border-radius: 18px;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 14px 35px rgba(2, 6, 23, 0.08);
+            position: relative;
         }
 
         .payment-qr-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 12px 0 8px;
+            margin: 0;
             min-height: 220px;
         }
 
@@ -142,7 +259,10 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            min-height: 220px;
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.92);
         }
 
         .pix-loading[aria-hidden="false"] {
@@ -154,13 +274,13 @@
             height: 42px;
             border-radius: 999px;
             border: 4px solid #f2f2f2;
-            border-top-color: #ff6a2e;
+            border-top-color: #0f172a;
             animation: pix-spin 0.9s linear infinite;
         }
 
         .pix-loading-text {
             font-size: 14px;
-            color: #555;
+            color: #475569;
             text-align: center;
         }
 
@@ -170,25 +290,74 @@
             }
         }
 
+        .payment-qr-hint {
+            margin: 10px 0 0;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .payment-pix {
+            margin-top: 16px;
+        }
+
+        .payment-pix-label {
+            margin: 0 0 10px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
         .payment-pix-code input {
             width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 10px 12px;
-            font-size: 13px;
-            background: #fafafa;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-size: 12px;
+            background: #fff;
+            color: #0f172a;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        .payment-pix-code input:focus {
+            outline: none;
+            border-color: rgba(15, 23, 42, 0.22);
+            box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08);
         }
 
         .payment-copy-button {
             width: 100%;
             margin-top: 10px;
             border: 0;
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 12px 14px;
-            font-weight: 700;
+            font-weight: 800;
             color: #fff;
-            background: linear-gradient(45deg, #ff4629, #ff8e38);
+            background: #0f172a;
             cursor: pointer;
+            letter-spacing: 0.02em;
+        }
+
+        .payment-copy-button:hover {
+            background: #0b1220;
+        }
+
+        .payment-copy-button:active {
+            transform: translateY(1px);
+        }
+
+        .payment-copy-button:disabled {
+            background: rgba(15, 23, 42, 0.35);
+            cursor: not-allowed;
+        }
+
+        .payment-copy-button:disabled:active {
+            transform: none;
+        }
+
+        .payment-copy-button.is-copied {
+            background: #16a34a;
         }
 
         .pix-toast {
@@ -196,13 +365,14 @@
             left: 50%;
             bottom: 18px;
             transform: translateX(-50%);
-            background: rgba(17, 17, 17, 0.92);
+            background: rgba(15, 23, 42, 0.95);
             color: #fff;
             padding: 10px 14px;
             border-radius: 10px;
             font-size: 13px;
             display: none;
             z-index: 100000;
+            box-shadow: 0 14px 35px rgba(2, 6, 23, 0.32);
         }
 
         .pix-toast.show {
@@ -1537,7 +1707,7 @@ $(document).ready(function() {
           <img src="assets/img/imagens/perfil.jpg" alt="Avatar do Criador" id="pix-avatar-img">
         </div>
         <div class="payment-profile-info">
-          <h3 id="pix-creator-name">Julie Oliver</h3>
+          <h3 id="pix-modal-title"><span id="pix-creator-name">Julie Oliver</span></h3>
           <p id="pix-creator-handle">@Desbloqueiojulie_bot</p>
         </div>
       </div>
@@ -1548,7 +1718,7 @@ $(document).ready(function() {
       
       <!-- Benefícios -->
       <div class="pix-modal__benefits payment-benefits">
-        <h4>Benefícios exclusivos:</h4>
+        <h4 class="payment-section-title">Benefícios exclusivos</h4>
         <ul class="payment-benefits-list">
           <li>Acesso imediato ao conteúdo exclusivo</li>
           <li>Sem renovação automática</li>
@@ -1558,27 +1728,28 @@ $(document).ready(function() {
 
       <!-- Informações do Plano -->
       <div class="payment-plan">
-        <h5 class="payment-plan-label">Você está adquirindo:</h5>
-        <p class="payment-plan-duration" id="pix-description">Carregando...</p>
+        <div class="payment-plan-info">
+          <h5 class="payment-plan-label">Você está adquirindo</h5>
+          <p class="payment-plan-duration" id="pix-description">Carregando...</p>
+        </div>
         <h3 class="payment-plan-price" id="pix-amount">R$ 0,00</h3>
       </div>
 
       <!-- QR Code -->
-      <div class="pix-loading" id="pix-loading" aria-hidden="true">
-        <div class="pix-loading-spinner"></div>
-        <p class="pix-loading-text">Gerando QR Code...</p>
+      <div class="payment-qr-card">
+        <div class="pix-loading" id="pix-loading" aria-hidden="true">
+          <div class="pix-loading-spinner"></div>
+          <p class="pix-loading-text">Gerando QR Code...</p>
+        </div>
+        <div class="payment-qr-container" id="pix-qrcode-container">
+           <img id="pix-qr-image" src="" alt="QR Code PIX" style="display: none;">
+        </div>
+        <p class="payment-qr-hint">Abra o app do seu banco e escaneie o código acima</p>
       </div>
-      <div class="payment-qr-container" id="pix-qrcode-container">
-         <!-- O QR Code será injetado aqui ou a imagem será exibida -->
-         <img id="pix-qr-image" src="" alt="QR Code PIX" style="display: none;">
-      </div>
-      <p style="text-align: center; font-size: 14px; color: #666; margin-bottom: 20px;">
-        Abra o app do seu banco e escaneie o código acima
-      </p>
 
       <!-- PIX Copia e Cola -->
       <div class="payment-pix">
-        <h5 class="payment-pix-label">Ou use o Pix Copia e Cola:</h5>
+        <h5 class="payment-pix-label">Pix Copia e Cola</h5>
         <div class="payment-pix-code">
            <input type="text" id="pix-key-input" readonly value="" aria-label="Código PIX Copia e Cola">
         </div>
@@ -1718,6 +1889,14 @@ $(document).ready(function() {
         const input = document.getElementById('pix-key-input');
         if (input) input.value = '';
 
+        const copyBtn = document.getElementById('pix-copy-btn');
+        if (copyBtn) {
+            copyBtn.disabled = true;
+            copyBtn.classList.remove('is-copied');
+            if (!copyBtn.dataset.originalText) copyBtn.dataset.originalText = copyBtn.textContent || 'COPIAR CHAVE PIX';
+            copyBtn.textContent = copyBtn.dataset.originalText;
+        }
+
         const description = document.getElementById('pix-description');
         if (description) description.textContent = 'Carregando...';
 
@@ -1731,6 +1910,7 @@ $(document).ready(function() {
         const closeBtn = document.getElementById('pix-modal-close');
         const copyBtn = document.getElementById('pix-copy-btn');
         const keyInput = document.getElementById('pix-key-input');
+        let copyResetTimer = null;
 
         if (closeBtn) {
             closeBtn.addEventListener('click', () => setPixModalOpen(false));
@@ -1747,6 +1927,8 @@ $(document).ready(function() {
         });
 
         if (copyBtn && keyInput) {
+            copyBtn.disabled = true;
+            if (!copyBtn.dataset.originalText) copyBtn.dataset.originalText = copyBtn.textContent || 'COPIAR CHAVE PIX';
             copyBtn.addEventListener('click', async () => {
                 const code = keyInput.value || '';
                 if (!code) return;
@@ -1766,6 +1948,14 @@ $(document).ready(function() {
                     document.body.removeChild(textarea);
                     showPixToast('Chave copiada com sucesso!');
                 }
+
+                copyBtn.classList.add('is-copied');
+                copyBtn.textContent = 'COPIADO';
+                if (copyResetTimer) window.clearTimeout(copyResetTimer);
+                copyResetTimer = window.setTimeout(() => {
+                    copyBtn.classList.remove('is-copied');
+                    copyBtn.textContent = copyBtn.dataset.originalText || 'COPIAR CHAVE PIX';
+                }, 1600);
             });
         }
 
@@ -1799,6 +1989,9 @@ $(document).ready(function() {
 
                     const input = document.getElementById('pix-key-input');
                     if (input) input.value = result?.qr_code || '';
+
+                    const copyBtn = document.getElementById('pix-copy-btn');
+                    if (copyBtn) copyBtn.disabled = !(result?.qr_code || '');
 
                     setPixLoading(false);
                     renderPixQrCode(result || {});
