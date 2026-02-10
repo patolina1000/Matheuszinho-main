@@ -1,0 +1,543 @@
+.swal-modal .swal-text {
+    text-align: center;
+}
+
+body {
+    font-family: 'Inter' !important;
+}
+
+.addressCheckout {
+    display: none;
+}
+
+
+.notification {
+    position: fixed;
+    bottom: -25px;
+    z-index: 999;
+    display: flex;
+    left: 0;
+    right: 0;
+}
+
+.notification.hide {
+    display: none !important;
+}
+
+.form-button-ext {
+    font-size: 14px;
+    font-weight: 700;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 30px;
+    padding: 8px 18px 9px 18px;
+    border-color: #fe754f !important;
+    background: #fe754f !important;
+    color: #ffffff !important;
+    width: 100%;
+}
+
+@media (max-width: 355px) {
+    .text-counts-profile {
+        font-size: 10px !important;
+        font-weight: 400;
+    }
+    .text-profile-one {
+        font-size: 1.2em !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .media-content{
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 460px) {
+    .text-counts-profile {
+        font-size: 11px !important;
+        font-weight: 400;
+    }
+
+    .btn-mobile {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+
+    .settings-panel .float-left {
+        margin-left: 25px;
+        font-size: 14px;
+    }
+
+    .settings-panel .float-right {
+        margin-right: 25px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .accordion-content {
+        border: 0;
+    }
+
+
+
+    .f-switch.is-accent {
+        float: left;
+    }
+}
+
+.cover-bg {
+    border: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.panel.panel-card .panel-heading {
+    border-radius: 0px !important;
+    position: relative;
+    z-index: 2;
+    height: 240px;
+    overflow: hidden;
+    -webkit-transition: height 600ms ease-in-out;
+    transition: height 600ms ease-in-out
+}
+
+.panel.panel-card .panel-heading img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: 120%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0)
+}
+
+.panel.panel-card .panel-figure {
+    position: absolute;
+    top: auto;
+    z-index: 3;
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0);
+    -webkit-transition: opacity 400ms ease-in-out;
+    transition: opacity 400ms ease-in-out
+}
+
+
+.bg-img-styles {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.background-custom-size {
+    height: 200px;
+}
+
+@media (max-width: 800px) {
+    .background-custom-size {
+        height: 180px;
+    }
+}
+
+@media (max-height: 670px) {
+    .background-custom-size {
+        height: 200px;
+    }
+}
+
+.user-img {
+    max-width: 125px;
+    max-height: 125px;
+}
+
+.bg-img-profile {
+    background: #ffffff;
+    border-radius: 200px !important;
+    padding: 4px;
+}
+
+.text-counts-profile {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.hr-profile {
+    border-top: 2px solid #959595;
+    margin-top: 0px;
+}
+
+.roundbutton {
+    height: 35px;
+    width: 35px;
+    border: 1px solid #919191;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    text-decoration: none;
+    margin-left: 2%;
+}
+
+
+.color-icon-twitter {
+    color: #3986FA;
+}
+
+.color-icon-tiktok {
+    color: #292828;
+}
+
+
+.color-icon-telegram {
+    color: #3E99CD;
+}
+
+.color-icon-instagran {
+    /* Fallback: Set a background color. */
+    background-color: #482F92;
+    /* Create the gradient. */
+    background-image: linear-gradient(45deg, #482F92, #E926CA);
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+
+.text-decoration-none {
+    text-decoration: none;
+    margin-right: 25px;
+}
+
+.profile-signatures{
+    margin-left: 15px;
+}
+
+.text-decoration-none .float-left {
+    margin-left: 25px;
+}
+
+.settings-panel .float-left {
+    margin-left: 25px;
+}
+
+.font-15-w-600 {
+    font-size: 15px;
+    font-weight: 600 !important;
+}
+
+[data-toggle="collapse"].collapsed .if-not-collapsed,
+[data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+    display: none;
+}
+
+.border-profile {
+    background: white;
+    border-radius: 200px !important;
+    /*height: 108%;*/
+    left: -4px;
+    position: absolute;
+    top: -4px;
+    width: 107%;
+    z-index: -1 !important;
+}
+
+/********************************************
+        ************ Global settings ****************
+        *********************************************/
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+
+/********************************************
+        ************ Floating label ****************
+        *********************************************/
+
+.form-capsule .form-group {
+    /* Form group*/
+    position: relative;
+}
+
+/******* Label *******/
+
+.form-capsule .form-group label {
+    /* Input field floating label */
+    position: absolute;
+    font-size: 0.8em;
+    top: 0px;
+    width: 100%;
+    padding: 0 10px;
+    margin: 5px 0 10px 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+    /* prevent flickering */
+    -webkit-backface-visibility: hidden;
+    pointer-events: none;
+}
+
+.form-capsule .show-label label {
+    /* Active state for label when visible */
+    opacity: 1;
+}
+
+/******** Form control fields ********/
+
+.form-capsule .form-control {
+    /* Form control fields */
+    height: 50px;
+    padding: 15px 10px;
+    box-shadow: 0 0 0 2px transparent;
+    transition: all 0.2s ease-out;
+}
+
+.form-capsule .form-control:focus {
+    /* Focus state for form-control fields */
+    box-shadow: 0 0 0 2px #000066;
+    outline: transparent;
+    border-color: transparent;
+}
+
+.form-capsule .show-label .form-control {
+    /* Active state for form-control fields */
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+
+.form-group-icon-label-text {
+    width: 49px !important;
+    height: 37px !important;
+    left: 13px !important;
+    font-size: 19px;
+    top: 21px !important;
+}
+
+.control.form-group.has-icon.show-label>label {
+    padding-left: 1em !important;
+}
+
+.control.form-group.has-icon.show-label>input,
+.control.form-group.has-icon.show-label>select {
+    padding-left: 2.5em !important;
+    height: 60px;
+}
+
+#ajudaSenha {
+    font-size: 11px;
+    padding-bottom: 0;
+}
+
+.accordion-no-bg, .accordion-no-bg:hover, .accordion-no-bg:active {
+    background: none;
+}
+
+.border-radius-bt-5 {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.border-radius-bt-5.active-header {
+    border-radius: 0px;
+}
+
+.accordion-frist.inactive-header {
+    border-radius: 5px 5px 0px 0px;
+}
+
+.no-border-radius {
+    border-radius: 0;
+}
+
+.font-15 {
+    font-size: 15px;
+}
+
+/*FIX TO BOOTRAP */
+
+.navbar {
+    padding: 0;
+    margin-bottom: 6px;
+}
+
+.btn-outline-success {
+    border-color: #ff9956 !important;
+    color: #ff9956 !important;
+}
+
+.form-capsule .form-control:focus {
+    box-shadow: 0 0 0 1px #ff9956 !important;
+}
+
+.text-primary {
+    color: #fe754f !important;
+}
+
+.btn-primary {
+    color: #fefefe;
+    background: linear-gradient(45deg,#F58170,#F9AF77) !important;
+    border-radius: 30px;
+    border: none;
+}
+
+.btn-primary:hover {
+    color: #fefefe;
+    background: linear-gradient(45deg,#FFA08A,#FFC09A) !important;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show>.btn-outline-secondary.dropdown-toggle, .btn-outline-secondary:hover,
+.btn-outline-success:not(:disabled):not(.disabled).active, .btn-outline-success:not(:disabled):not(.disabled):active, .show>.btn-outline-success.dropdown-toggle, .btn-outline-success:hover {
+    color: #FFFFFF !important;
+    background-color: #FF9956 !important;
+    border-color: #FF9956 !important;
+}
+
+.btn-outline-success:disabled,
+.btn-outline-success:disabled:hover {
+    cursor: not-allowed;
+    border-color: #ff9956 !important;
+    color: #ff9956 !important;
+    background-color: #FFFFFF !important;
+}
+
+/*FIX TO BOOTRAP */
+
+.column-country {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    margin: 15px;
+    padding: 20px 0px 0px 0px;
+    width: 95.6% !important;
+}
+
+#ajudaCpf {
+    font-size: 11px;
+    padding-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+    .column-country {
+        width: 97.8% !important;
+    }
+}
+
+.checkout-back-button {
+    display: none;
+    cursor: pointer;
+    margin-left: 16px;
+    width: 24px;
+}
+
+.text-profile-two {
+    font-size: 0.8em;
+}
+
+/* Container Geral */
+.skeleton-user-info {
+    min-height: 520px;
+}
+
+/* Header Skeleton */
+.header-skeleton {
+    height: 175px;
+    position: relative;
+}
+
+.cover-photo-skeleton {
+    height: 100%;
+    border-radius: 0px !important;
+}
+
+.profile-photo-skeleton {
+    position: absolute!important;
+    width: 140px!important;
+    height: 140px;
+    top: calc(175px - 70px);
+    left: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 128px;
+    height: 128px;
+    border-radius: 50% !important;
+}
+
+.action-icon-skeleton {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: calc(175px + 16px);
+    right: 16px;
+    border-radius: 50% !important;
+}
+
+/* User Info Skeleton */
+.user-info-skeleton {
+    padding: 0 16px !important;
+    margin-top: calc(60px + 30px);
+    display: flex;
+    flex-direction: column;
+}
+
+.name-skeleton {
+    height: 30px;
+    width: 30%;
+    margin-bottom: 16px;
+    margin-top: 24px;
+}
+
+.username-skeleton {
+    width: 25%;
+    height: 24px;
+    margin-bottom: 16px;
+}
+
+.bio-skeleton {
+    display: flex;
+    flex-direction: column;
+}
+
+.bio-line {
+    height: 16px;
+    width: 90%;
+    margin-bottom: 8px;
+}
+
+.bio-line-short {
+    height: 16px;
+    width: 10%;
+}
+
+.btn-checkout {
+    height: 35px;
+    margin-bottom: 8px;
+}
+
+.icons-checkout {
+    height: 45px;
+    width: 49%;
+}
+
+.block-image-skeleton {
+    max-height: calc(100vh - 120px);
+    width: 100%;
+    height: calc(70vh - 120px);
+}
