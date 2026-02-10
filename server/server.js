@@ -145,7 +145,7 @@ function httpsPostJson(urlString, body) {
 function sanitizeUrlInput(value) {
     const trimmed = String(value || '').trim();
     if (!trimmed) return '';
-    return trimmed.replace(/^`+|`+$/g, '').replace(/^"+|"+$/g, '').replace(/^'+|'+$/g, '').trim();
+    return trimmed.replace(/[`'"]/g, '').replace(/\s+/g, '').trim();
 }
 
 function ensureWebhookPath(urlString) {
@@ -160,6 +160,47 @@ function ensureWebhookPath(urlString) {
     } catch {
         return cleaned;
     }
+}
+
+function normalizeWiinpayResponse(data) {
+    if (!data || typeof data !== 'object') return data;
+
+    const payload = data.data && typeof data.data === 'object' ? data.data : data;
+    if (!payload || typeof payload !== 'object') return data;
+
+    const pickStringKey = (obj, keys) =>
+        keys.find((key) => typeof obj?.[key] === 'string' && obj[key].trim().length > 0);
+
+    const qrCodeKey = pickStringKey(payload, [
+        'qr_code',
+        'qrCode',
+        'qrcode',
+        'pix_copia_cola',
+        'pixCopiaECola',
+        'brcode',
+        'br_code',
+        'emv',
+        'copy_paste',
+        'pix_copy_paste',
+    ]);
+
+    const qrBase64Key = pickStringKey(payload, [
+        'qr_code_base64',
+        'qrCodeBase64',
+        'qrcode_base64',
+        'qrCodeImage',
+        'qr_code_image',
+        'qr_image_base64',
+        'qrCodeImageBase64',
+        'qrCodeBase64Image',
+    ]);
+
+    const normalized = { ...payload };
+
+    if (qrCodeKey && !normalized.qr_code) normalized.qr_code = payload[qrCodeKey];
+    if (qrBase64Key && !normalized.qr_code_base64) normalized.qr_code_base64 = payload[qrBase64Key];
+
+    return normalized;
 }
 
 app.get('/health', (req, res) => {
@@ -255,7 +296,20 @@ app.post('/api/wiinpay/pix/create', async (req, res) => {
             return;
         }
 
-        res.status(200).json(wiinpayResponse.data);
+        const normalizedResponse = normalizeWiinpayResponse(wiinpayResponse.data);
+        const responseKeys =
+            normalizedResponse && typeof normalizedResponse === 'object' ? Object.keys(normalizedResponse) : [];
+
+        log('info', 'wiinpay_create_response_payload', {
+            request_id: req.requestId,
+            keys: responseKeys,
+            qr_code_length:
+                typeof normalizedResponse?.qr_code === 'string' ? normalizedResponse.qr_code.length : 0,
+            qr_code_base64_length:
+                typeof normalizedResponse?.qr_code_base64 === 'string' ? normalizedResponse.qr_code_base64.length : 0,
+        });
+
+        res.status(200).json(normalizedResponse);
     } catch (err) {
         log('error', 'wiinpay_create_error', {
             request_id: req.requestId,
